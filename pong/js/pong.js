@@ -13,12 +13,14 @@ var p1 = new Box();
 p1.w = 20
 p1.h = 150
 p1.x = 0 + p1.w/2
+p1.color = 'gray'
 
 //p2 setup
-var p2 = new box();
-p2.w = 20
+var p2 = new Box();
+p2.w = 40
 p2.h = 150
-p2.x = 0 + p2.w/2
+p2.x = 0 + c.width 
+p2.color = 'gray'
 
 //ball setup
 var ball = new Box();
@@ -26,7 +28,7 @@ ball.w = 20
 ball.h = 20
 ball.vx = -2
 ball.vy = -2
-ball.color = `black`
+ball.color = `white`
 
 function main()
 {
@@ -118,8 +120,9 @@ function main()
     //p2 with ball collision
     if(ball.collide(p2))
     {
-        ball.x = p2.x + p2.w/2 + ball.w/2
+        ball.x = p2.x - p2.w/2 - ball.w/2
         ball.vx = -ball.vx;
+    
     }
 
     //draw the objects
