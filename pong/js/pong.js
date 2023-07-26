@@ -8,6 +8,8 @@ var timer = setInterval(main, 1000/60)
 //global friction variable
 var fy = .97
 
+
+
 //p1 setup
 var p1 = new Box();
 p1.w = 20
@@ -22,13 +24,24 @@ p2.h = 150
 p2.x = 0 + c.width 
 p2.color = 'gray'
 
+//Player Array
+player = [new Player(), new Player()]
+player[0].pad = new Box();
+player[1].pad = new Box();
+console.log(player)
+
 //ball setup
+
 var ball = new Box();
 ball.w = 20
 ball.h = 20
 ball.vx = -2
 ball.vy = -2
 ball.color = `white`
+
+
+
+
 
 function main()
 {
