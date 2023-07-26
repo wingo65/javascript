@@ -8,27 +8,29 @@ var timer = setInterval(main, 1000/60)
 //global friction variable
 var fy = .97
 
-
-
-//p1 setup
-var p1 = new Box();
-p1.w = 20
-p1.h = 150
-p1.x = 0 + p1.w/2
-p1.color = 'gray'
-
-//p2 setup
-var p2 = new Box();
-p2.w = 40
-p2.h = 150
-p2.x = 0 + c.width 
-p2.color = 'gray'
-
 //Player Array
 player = [new Player(), new Player()]
 player[0].pad = new Box();
 player[1].pad = new Box();
 console.log(player)
+
+
+//Pad Array 
+pad = [player[0].pad, player[1].pad]
+
+//pad[0] setup
+pad[0].w = 20
+pad[0].h = 150
+pad[0].x = 0 + pad[0].w/2
+pad[0].color = 'gray'
+
+//pad[0] setup
+pad[0].w = 40
+pad[0].h = 150
+pad[0].x = 0 + c.width 
+pad[0].color = 'gray'
+
+
 
 //ball setup
 
@@ -48,56 +50,56 @@ function main()
     //erases the canvas
     ctx.clearRect(0,0,c.width,c.height)
     
-    //p1 accelerates when key is pressed 
+    //pad[0] accelerates when key is pressed 
     if(keys[`w`])
     {
-       p1.vy += -p1.force
+       pad[0].vy += -pad[0].force
     }
 
     if(keys[`s`])
     {
-        p1.vy += p1.force
+        pad[0].vy += pad[0].force
     }
 
-    //p2 accelerates when key is pressed
+    //pad[0] accelerates when key is pressed
     if(keys[`ArrowUp`])
     {
-       p2.vy += -p2.force
+       pad[0].vy += -pad[0].force
     }
 
     if(keys[`ArrowDown`])
     {
-        p2.vy += p2.force
+        pad[0].vy += pad[0].force
     }
 
     //applies friction
-    p1.vy *= fy
-    p2.vy *= fy
+    pad[0].vy *= fy
+    pad[0].vy *= fy
     //player movement
-    p1.move();
-    p2.move();
+    pad[0].move();
+    pad[0].move();
 
     //ball movement
     ball.move()
 
-    //p1 collision
-    if(p1.y < 0+p1.h/2)
+    //pad[0] collision
+    if(pad[0].y < 0+pad[0].h/2)
     {
-        p1.y = 0+p1.h/2
+        pad[0].y = 0+pad[0].h/2
     }
-    if(p1.y > c.height-p1.h/2)
+    if(pad[0].y > c.height-pad[0].h/2)
     {
-        p1.y = c.height-p1.h/2
+        pad[0].y = c.height-pad[0].h/2
     }
 
-    //p2 collision 
-    if(p2.y < 0+p2.h/2)
+    //pad[0] collision 
+    if(pad[0].y < 0+pad[0].h/2)
     {
-        p2.y = 0+p2.h/2
+        pad[0].y = 0+pad[0].h/2
     }
-    if(p2.y > c.height-p2.h/2)
+    if(pad[0].y > c.height-pad[0].h/2)
     {
-        p2.y = c.height-p2.h/2
+        pad[0].y = c.height-pad[0].h/2
     }
 
     //ball collision 
@@ -123,24 +125,24 @@ function main()
        
     }
 
-    //p1 with ball collision
-    if(ball.collide(p1))
+    //pad[0] with ball collision
+    if(ball.collide(pad[0]))
     {
-        ball.x = p1.x + p1.w/2 + ball.w/2
+        ball.x = pad[0].x + pad[0].w/2 + ball.w/2
         ball.vx = -ball.vx;
     }
 
-    //p2 with ball collision
-    if(ball.collide(p2))
+    //pad[0] with ball collision
+    if(ball.collide(pad[0]))
     {
-        ball.x = p2.x - p2.w/2 - ball.w/2
+        ball.x = pad[0].x - pad[0].w/2 - ball.w/2
         ball.vx = -ball.vx;
     
     }
 
     //draw the objects
-    p1.draw()
-    p2.draw()
+    pad[0].draw()
+    pad[0].draw()
     ball.draw()
     
 }
