@@ -19,10 +19,10 @@ console.log(player)
 pad = [player[0].pad, player[1].pad]
 
 //pad[0] setup
-pad[0].w = 20
-pad[0].h = 150
-pad[0].x = 0 + pad[0].w/2
-pad[0].color = 'gray'
+pad[1].w = 20
+pad[1].h = 150
+pad[1].x = 0 + pad[1].w/2
+pad[1].color = 'gray'
 
 //pad[0] setup
 pad[0].w = 40
@@ -43,8 +43,6 @@ ball.color = `white`
 
 
 
-
-
 function main()
 {
     //erases the canvas
@@ -53,12 +51,12 @@ function main()
     //pad[0] accelerates when key is pressed 
     if(keys[`w`])
     {
-       pad[0].vy += -pad[0].force
+       pad[1].vy += -pad[1].force
     }
 
     if(keys[`s`])
     {
-        pad[0].vy += pad[0].force
+        pad[1].vy += pad[1].force
     }
 
     //pad[0] accelerates when key is pressed
@@ -73,23 +71,23 @@ function main()
     }
 
     //applies friction
-    pad[0].vy *= fy
+    pad[1].vy *= fy
     pad[0].vy *= fy
     //player movement
-    pad[0].move();
+    pad[1].move();
     pad[0].move();
 
     //ball movement
     ball.move()
 
     //pad[0] collision
-    if(pad[0].y < 0+pad[0].h/2)
+    if(pad[1].y < 0+pad[1].h/2)
     {
-        pad[0].y = 0+pad[0].h/2
+        pad[1].y = 0+pad[1].h/2
     }
-    if(pad[0].y > c.height-pad[0].h/2)
+    if(pad[1].y > c.height-pad[1].h/2)
     {
-        pad[0].y = c.height-pad[0].h/2
+        pad[1].y = c.height-pad[1].h/2
     }
 
     //pad[0] collision 
@@ -107,12 +105,15 @@ function main()
     {
         ball.x = c.width/2
         ball.y  =c.height/2
+        player[0].score += 1
     }
     if(ball.x > c.width)
     {
         ball.x = c.width
         ball.vx = -ball.vx
+        player[1].score += 1
     }
+    console.log(`${player[0].score} | ${player[0].score}`)
     if(ball.y < 0)
     {
         ball.y = 0
@@ -125,10 +126,10 @@ function main()
        
     }
 
-    //pad[0] with ball collision
-    if(ball.collide(pad[0]))
+    //pad[1] with ball collision
+    if(ball.collide(pad[1]))
     {
-        ball.x = pad[0].x + pad[0].w/2 + ball.w/2
+        ball.x = pad[1].x + pad[1].w/2 + ball.w/2
         ball.vx = -ball.vx;
     }
 
@@ -141,7 +142,7 @@ function main()
     }
 
     //draw the objects
-    pad[0].draw()
+    pad[1].draw()
     pad[0].draw()
     ball.draw()
     
