@@ -37,8 +37,8 @@ pad[0].color = 'gray'
 var ball = new Box();
 ball.w = 20
 ball.h = 20
-ball.vx = -2
-ball.vy = -2
+ball.vx = -5
+ball.vy = -5
 ball.color = `white`
 
 
@@ -113,7 +113,10 @@ function main()
         ball.vx = -ball.vx
         player[1].score += 1
     }
+
     console.log(`${player[0].score} | ${player[0].score}`)
+    var highscore = document.querySelectorAll(`#score div`)
+
     if(ball.y < 0)
     {
         ball.y = 0
@@ -146,4 +149,8 @@ function main()
     pad[0].draw()
     ball.draw()
     
+    for(i = 0; i < highscore.length; i++)
+    {
+        highscore[i].innerHTML = `${player[i].score}`
+    }
 }
