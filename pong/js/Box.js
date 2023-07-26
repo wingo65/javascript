@@ -10,6 +10,7 @@ class Box
         this.vx = 0
         this.vy = 0
         this.force = 1;
+        this.dir = 1
     }
 
     draw()

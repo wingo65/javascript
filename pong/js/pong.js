@@ -19,12 +19,14 @@ console.log(player)
 pad = [player[0].pad, player[1].pad]
 
 //pad[0] setup
+pad[1].dir = 1
 pad[1].w = 20
 pad[1].h = 150
 pad[1].x = 0 + pad[1].w/2
 pad[1].color = 'gray'
 
 //pad[0] setup
+pad[0].dir = -1
 pad[0].w = 40
 pad[0].h = 150
 pad[0].x = 0 + c.width 
@@ -70,35 +72,10 @@ function main()
         pad[0].vy += pad[0].force
     }
 
-    //applies friction
-    pad[1].vy *= fy
-    pad[0].vy *= fy
-    //player movement
-    pad[1].move();
-    pad[0].move();
+
 
     //ball movement
     ball.move()
-
-    //pad[0] collision
-    if(pad[1].y < 0+pad[1].h/2)
-    {
-        pad[1].y = 0+pad[1].h/2
-    }
-    if(pad[1].y > c.height-pad[1].h/2)
-    {
-        pad[1].y = c.height-pad[1].h/2
-    }
-
-    //pad[0] collision 
-    if(pad[0].y < 0+pad[0].h/2)
-    {
-        pad[0].y = 0+pad[0].h/2
-    }
-    if(pad[0].y > c.height-pad[0].h/2)
-    {
-        pad[0].y = c.height-pad[0].h/2
-    }
 
     //ball collision 
     if(ball.x < 0)
@@ -129,28 +106,32 @@ function main()
        
     }
 
-    //pad[1] with ball collision
-    if(ball.collide(pad[1]))
-    {
-        ball.x = pad[1].x + pad[1].w/2 + ball.w/2
-        ball.vx = -ball.vx;
-    }
-
-    //pad[0] with ball collision
-    if(ball.collide(pad[0]))
-    {
-        ball.x = pad[0].x - pad[0].w/2 - ball.w/2
-        ball.vx = -ball.vx;
-    
-    }
-
     //draw the objects
-    pad[1].draw()
-    pad[0].draw()
     ball.draw()
     
     for(i = 0; i < highscore.length; i++)
     {
         highscore[i].innerHTML = `${player[i].score}`
+        //applies friction
+        pad[i].vy *= fy
+        //player movement
+        pad[i].move();
+        if(pad[i].y < 0+pad[i].h/2)
+        {
+            pad[i].y = 0+pad[i].h/2
+        }
+        if(pad[i].y > c.height-pad[i].h/2)
+        {
+            pad[i].y = c.height-pad[i].h/2
+        }
+        if(ball.collide(pad[i]))
+        {
+            ball.x = pad[i].x + (pad[i].w/2 + ball.w/2) * pad[i].dir
+            ball.vx = -ball.vx;
+
+        }
+        pad[i].draw()
+    
+
     }
 }
